@@ -1,7 +1,113 @@
-body {
-  background: #f9fafb;
-  color: #171717;
-  font-family: Arial, Helvetica, sans-serif;
-  margin: 0;
-  padding: 0;
+@import "bootstrap/dist/css/bootstrap.min.css";
+@import "bootstrap-icons/font/bootstrap-icons.css";
+
+/* Brand colors */
+:root {
+    --brand: #111827;
+    --accent: #d32f2f;
+    --muted: #6b7280;
+}
+
+/* Header base */
+.site-header {
+    background: #fff;
+    border-bottom: 1px solid rgba(0,0,0,0.06);
+    position: sticky;
+    top: 0;
+    z-index: 1030;
+}
+
+/* Logo */
+.logo-link { display:flex; align-items:center; gap:0.5rem; }
+.brand {
+    font-weight: 800;
+    font-size: 1.15rem;
+    color: var(--brand);
+}
+.logo-sub { color: var(--muted); font-size: 0.85rem; font-weight:500; }
+
+/* Center nav */
+.nav-center {
+    position: absolute;
+    left: 50%;
+    transform: translateX(-50%);
+}
+.nav-center .nav-link {
+    color: var(--muted);
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.6px;
+    font-size: 0.85rem;
+}
+.nav-center .nav-link:hover { color: var(--brand); text-decoration: none; }
+
+/* CTA button */
+.btn-cta {
+    background: linear-gradient(90deg, var(--accent), #b71c1c);
+    border: none;
+    color: #fff;
+    padding: 0.45rem 0.9rem;
+    border-radius: 8px;
+    font-weight: 600;
+    box-shadow: 0 6px 18px rgba(211,47,47,0.12);
+}
+
+/* Ghost icon buttons */
+.btn-ghost {
+    background: transparent;
+    border: none;
+    color: var(--muted);
+    font-size: 1.05rem;
+}
+/* Layout global pour footer en bas */
+:root {
+    --site-max-width: 1100px;
+}
+
+/* Assure que html et body occupent toute la hauteur */
+html, body, #__next {
+    height: 100%;
+    margin: 0;
+}
+
+/* Conteneur racine en colonne flex */
+.app-root {
+    min-height: 100%;
+    display: flex;
+    flex-direction: column;
+}
+
+/* Main prend tout l'espace restant */
+.app-main {
+    flex: 1 0 auto; /* grow, shrink, base */
+    width: 100%;
+    max-width: var(--site-max-width);
+    margin-left: auto;
+    margin-right: auto;
+    padding: 2rem 1rem;
+}
+
+/* Footer compact collé en bas */
+.site-footer {
+    flex-shrink: 0; /* ne pas rétrécir */
+    background: #fafafa;
+    border-top: 1px solid rgba(0,0,0,0.06);
+    color: #6b7280;
+    padding: 0.6rem 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+/* Variante compacte */
+.site-footer.compact {
+    min-height: 56px;
+    padding-top: 0.4rem;
+    padding-bottom: 0.4rem;
+}
+
+/* Responsive */
+@media (max-width: 576px) {
+    .app-main { padding: 1rem; }
+    .site-footer { padding: 0.5rem 0; }
 }

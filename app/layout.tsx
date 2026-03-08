@@ -1,38 +1,48 @@
-import { ReactNode } from "react";
-import { CssBaseline, AppBar, Toolbar, Typography, Container, Box } from "@mui/material";
+// app/layout.tsx
+import './globals.css';
+import React from 'react';
+import Footer from './components/Footer';
 
-export const metadata = {
-    title: "Cozina Blog",
-    description: "Blog moderne style Kuurl",
-};
+export const metadata = { title: 'Cozina', description: 'Blog' };
 
-export default function RootLayout({ children }: { children: ReactNode }) {
+export default function RootLayout({ children }: { children: React.ReactNode }) {
     return (
         <html lang="fr">
-        <head>
-            <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-            <title>Cozina Blog</title>
-        </head>
         <body>
-        <CssBaseline />
-
-        {/* Header */}
-        <AppBar position="static" sx={{ backgroundColor: "#111111" }}>
-            <Toolbar>
-                <Typography variant="h6">Cozina Blog</Typography>
-            </Toolbar>
-        </AppBar>
-
-        {/* Body */}
-        <Container sx={{ mt: 4, mb: 4, minHeight: "80vh" }}>
-            {children}
-        </Container>
-
-        {/* Footer */}
-        <Box sx={{ backgroundColor: "#111111", color: "#fff", textAlign: "center", py: 3 }}>
-            © 2026 Cozina Blog. Tous droits réservés.
-        </Box>
+        <Header />
+        <main className="container py-5">{children}</main>
+        <Footer />
         </body>
         </html>
+    );
+}
+
+function Header() {
+    return (
+        <header className="site-header">
+            <div className="container d-flex align-items-center justify-content-between py-3">
+                {/* Left: logo */}
+                <a className="d-flex align-items-center text-decoration-none logo-link" href="/">
+                    <div className="brand">Cozina</div>
+                    <div className="ms-2 logo-sub">Blog</div>
+                </a>
+
+                {/* Center: main nav (Articles centered) */}
+                <nav className="nav-center">
+                    <a className="nav-link" href="/articles">Articles</a>
+                </nav>
+
+                {/* Right: actions */}
+                <div className="d-flex align-items-center gap-2">
+                    <a className="btn btn-ghost text-muted" href="/search" aria-label="Recherche">
+                        <i className="bi bi-search" />
+                    </a>
+                    <a className="btn btn-ghost text-muted" href="/cart" aria-label="Panier">
+                        <i className="bi bi-bag" />
+                    </a>
+                    <a className="btn btn-cta" href="/new">Écrire</a>
+                </div>
+            </div>
+        </header>
     );
 }
