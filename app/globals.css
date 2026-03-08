@@ -1,32 +1,43 @@
 @import "bootstrap/dist/css/bootstrap.min.css";
 @import "bootstrap-icons/font/bootstrap-icons.css";
 
-/* Brand colors */
+/* variables */
 :root {
-    --brand: #111827;
-    --accent: #d32f2f;
+    --site-max-width: 1100px;
+    --brand: #d86d33;
+    --accent: #d86d33;
     --muted: #6b7280;
+
+    /* baby pink */
+    --baby-pink: #ffeef6;
+    --text-on-pink: #111827;
 }
 
-/* Header base */
+/* ensure full height */
+html, body, #__next { height: 100%; margin: 0; }
+
+/* main area must leave space for fixed footer */
+.app-main {
+    width: 100%;
+    max-width: var(--site-max-width);
+    margin-left: auto;
+    margin-right: auto;
+    padding: 2rem 1rem;
+    padding-bottom: 80px; /* reserve space equal to footer height */
+    box-sizing: border-box;
+}
+
+/* Header */
 .site-header {
     background: #fff;
     border-bottom: 1px solid rgba(0,0,0,0.06);
-    position: sticky;
-    top: 0;
     z-index: 1030;
 }
+.logo-link { display:flex; align-items:center; gap:0.5rem; text-decoration:none; }
+.brand { font-weight:800; font-size:2.15rem; color:var(--brand); }
+.logo-sub { color:var(--muted); font-size:0.85rem; font-weight:500; }
 
-/* Logo */
-.logo-link { display:flex; align-items:center; gap:0.5rem; }
-.brand {
-    font-weight: 800;
-    font-size: 1.15rem;
-    color: var(--brand);
-}
-.logo-sub { color: var(--muted); font-size: 0.85rem; font-weight:500; }
-
-/* Center nav */
+/* Center nav (Articles) */
 .nav-center {
     position: absolute;
     left: 50%;
@@ -43,71 +54,66 @@
 
 /* CTA button */
 .btn-cta {
-    background: linear-gradient(90deg, var(--accent), #b71c1c);
+    background: linear-gradient(90deg, var(--accent), #d86d33);
     border: none;
     color: #fff;
     padding: 0.45rem 0.9rem;
     border-radius: 8px;
     font-weight: 600;
-    box-shadow: 0 6px 18px rgba(211,47,47,0.12);
 }
 
-/* Ghost icon buttons */
-.btn-ghost {
-    background: transparent;
-    border: none;
-    color: var(--muted);
-    font-size: 1.05rem;
-}
-/* Layout global pour footer en bas */
-:root {
-    --site-max-width: 1100px;
-}
-
-/* Assure que html et body occupent toute la hauteur */
-html, body, #__next {
-    height: 100%;
-    margin: 0;
-}
-
-/* Conteneur racine en colonne flex */
-.app-root {
-    min-height: 100%;
-    display: flex;
-    flex-direction: column;
-}
-
-/* Main prend tout l'espace restant */
-.app-main {
-    flex: 1 0 auto; /* grow, shrink, base */
-    width: 100%;
-    max-width: var(--site-max-width);
-    margin-left: auto;
-    margin-right: auto;
-    padding: 2rem 1rem;
-}
-
-/* Footer compact collé en bas */
+/* Footer fixed at bottom, using Bootstrap grid inside */
 .site-footer {
-    flex-shrink: 0; /* ne pas rétrécir */
+    position: fixed;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    width: 100%;
+    height: 64px; /* hauteur du footer */
     background: #fafafa;
     border-top: 1px solid rgba(0,0,0,0.06);
-    color: #6b7280;
-    padding: 0.6rem 0;
+    color: var(--muted);
     display: flex;
     align-items: center;
-    justify-content: center;
+    z-index: 1040;
 }
 
-/* Variante compacte */
-.site-footer.compact {
-    min-height: 56px;
-    padding-top: 0.4rem;
-    padding-bottom: 0.4rem;
+/* inside container spacing */
+.site-footer .container { max-width: var(--site-max-width); padding-left: 1rem; padding-right: 1rem; }
+
+/* brand in footer */
+.site-footer .brand { font-weight:800; color:var(--brand); font-size:1rem; }
+.site-footer small { color:#9ca3af; }
+
+/* responsive adjustments */
+@media (max-width: 767px) {
+    .nav-center { position: static; transform: none; margin-left: 0.5rem; }
+    .logo-sub { display:none; }
+    .app-main { padding: 1rem; padding-bottom: 80px; }
+    .site-footer { height: 56px; }
 }
 
-/* Responsive */
-@media (max-width: 576px) {
-    .app-main { padding: 1rem; }
-    .site-footer { padding: 0.5rem 0; }
+/* --- Fond rose bébé pour le corps et la zone principale --- */
+
+/* Appliquer le fond rose à tout le body (header/footer restent visibles) */
+body {
+    background-color: var(--baby-pink);
+    color: var(--text-on-pink);
 }
+
+/* Si tu préfères que seule la zone centrale soit rose (pas le header/footer),
+   remplace la règle body ci‑dessus par :
+   .app-main { background-color: var(--baby-pink); }
+*/
+
+/* Contraste pour cartes et conteneurs blancs sur le rose */
+.card, .container-card, .bg-white {
+    background: #ffffff;
+    color: var(--text-on-pink);
+    border-radius: 8px;
+    box-shadow: 0 6px 18px rgba(16,24,40,0.06);
+}
+
+/* Liens visibles sur fond rose */
+a { color: #b91c1c; }
+a:hover { text-decoration: underline; }
